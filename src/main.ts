@@ -1,7 +1,7 @@
 import express from "express";
 import swaggerUi from "swagger-ui-express";
 import routes from "./routes/index.js";
-import { checkDatabaseConnection, disconnectPrisma } from "./lib/prisma.js";
+import { checkDatabaseConnection } from "./lib/prisma.js";
 import swaggerSpec from "./config/swagger.js";
 
 const app = express();
@@ -69,20 +69,4 @@ async function startServer() {
   }
 }
 
-// Graceful shutdown
-process.on("SIGINT", async () => {
-  console.log("\n🛑 Encerrando servidor...");
-  await disconnectPrisma();
-  console.log("✅ Conexões fechadas. Servidor encerrado.");
-  process.exit(0);
-});
-
-process.on("SIGTERM", async () => {
-  console.log("\n🛑 Encerrando servidor...");
-  await disconnectPrisma();
-  console.log("✅ Conexões fechadas. Servidor encerrado.");
-  process.exit(0);
-});
-
-// Iniciar o servidor
 startServer();
