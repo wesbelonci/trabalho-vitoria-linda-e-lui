@@ -74,7 +74,7 @@ router.get(
   validateQuery(pokemonQuerySchema),
   async (req: TypedRequest, res: Response) => {
     try {
-      const queryParams = getValidatedData<PokemonQuery>(req);
+      const queryParams = getValidatedData<PokemonQuery>(req, "query");
       const result = await PokemonService.findMany(queryParams);
 
       res.json({
@@ -137,7 +137,7 @@ router.get(
   validateParams(pokemonParamsSchema),
   async (req: TypedRequest, res: Response) => {
     try {
-      const { id } = getValidatedData<PokemonParams>(req);
+      const { id } = getValidatedData<PokemonParams>(req, "params");
       const pokemon = await PokemonService.findById(parseInt(id));
 
       res.json({
@@ -255,7 +255,7 @@ router.post(
   validateBody(createPokemonSchema),
   async (req: TypedRequest, res: Response) => {
     try {
-      const pokemonData = getValidatedData<CreatePokemonInput>(req);
+      const pokemonData = getValidatedData<CreatePokemonInput>(req, "body");
       const pokemon = await PokemonService.create(pokemonData);
 
       res.status(201).json({
@@ -372,8 +372,8 @@ router.put(
   validateBody(updatePokemonSchema),
   async (req: TypedRequest, res: Response) => {
     try {
-      const { id } = getValidatedData<PokemonParams>(req);
-      const updateData = getValidatedData<UpdatePokemonInput>(req);
+      const { id } = getValidatedData<PokemonParams>(req, "params");
+      const updateData = getValidatedData<UpdatePokemonInput>(req, "body");
       const pokemon = await PokemonService.update(parseInt(id), updateData);
 
       res.json({
@@ -454,7 +454,7 @@ router.delete(
   validateParams(pokemonParamsSchema),
   async (req: TypedRequest, res: Response) => {
     try {
-      const { id } = getValidatedData<PokemonParams>(req);
+      const { id } = getValidatedData<PokemonParams>(req, "params");
       const result = await PokemonService.delete(parseInt(id));
 
       res.json({

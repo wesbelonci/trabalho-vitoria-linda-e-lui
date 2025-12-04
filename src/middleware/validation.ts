@@ -6,7 +6,7 @@ type ValidationType = "body" | "params" | "query";
 
 // Interface para o request tipado
 export interface TypedRequest<T = any> extends Request {
-  validatedData?: T;
+  validatedData?: Partial<Record<ValidationType, unknown>>;
 }
 
 // Middleware de validação genérico
@@ -33,7 +33,10 @@ export const validate = (
       }
 
       const validatedData = schema.parse(dataToValidate);
-      req.validatedData = validatedData;
+      req.validatedData = {
+        ...(req.validatedData ?? {}),
+        [type]: validatedData,
+      };
       next();
     } catch (error) {
       if (error instanceof ZodError) {
@@ -71,6 +74,9 @@ export const validateParams = (schema: z.ZodSchema) =>
 export const validateQuery = (schema: z.ZodSchema) => validate(schema, "query");
 
 // Helper para extrair dados validados do request
-export const getValidatedData = <T>(req: TypedRequest): T => {
-  return req.validatedData as T;
+export const getValidatedData = <T>(
+  req: TypedRequest,
+  type: ValidationType = "body"
+): T => {
+  return req.validatedData?.[type] as T;
 };

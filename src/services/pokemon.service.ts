@@ -87,6 +87,7 @@ export class PokemonService {
     const existingByName = await prisma.pokemon.findUnique({
       where: { name: data.name },
     });
+
     if (existingByName) {
       throw new Error(`Já existe um pokémon com o nome "${data.name}"`);
     }
@@ -95,6 +96,7 @@ export class PokemonService {
     const primaryType = await prisma.type.findUnique({
       where: { id: parseInt(data.primaryTypeId) },
     });
+
     if (!primaryType) {
       throw new Error("Tipo primário não encontrado");
     }

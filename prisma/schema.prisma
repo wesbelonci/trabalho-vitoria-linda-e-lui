@@ -41,8 +41,8 @@ model PokemonType {
   id        Int      @id @default(autoincrement())
   pokemonId Int
   typeId    Int
-  type      Type     @relation(fields: [typeId], references: [id])
-  pokemon   Pokemon  @relation(fields: [pokemonId], references: [id])
+  type      Type     @relation(fields: [typeId], references: [id], onDelete: Cascade)
+  pokemon   Pokemon  @relation(fields: [pokemonId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
 
   @@unique([pokemonId, typeId])
