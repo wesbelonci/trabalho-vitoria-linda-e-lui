@@ -25,7 +25,7 @@ const swaggerDefinition = {
       description: "Servidor de Desenvolvimento",
     },
     {
-      url: "https://vitoria-pokemon-api.com",
+      url: "https://vitoria.minhadieta.ai",
       description: "Servidor de Produção",
     },
   ],
