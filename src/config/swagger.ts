@@ -11,7 +11,7 @@ const swaggerDefinition = {
       "API RESTful para gerenciamento de Pokémons com validação robusta e operações CRUD completas",
     contact: {
       name: "Vitória Pokémon API",
-      url: "https://github.com/wesbelonci/vitoria",
+      url: "https://github.com/vitoriadias1/vitoria",
       email: "contato@vitoria-pokemon.com",
     },
     license: {
@@ -21,12 +21,12 @@ const swaggerDefinition = {
   },
   servers: [
     {
-      url: "http://localhost:4000",
-      description: "Servidor de Desenvolvimento",
-    },
-    {
       url: "https://vitoria.minhadieta.ai",
       description: "Servidor de Produção",
+    },
+    {
+      url: "http://localhost:4000",
+      description: "Servidor de Desenvolvimento",
     },
   ],
   tags: [
