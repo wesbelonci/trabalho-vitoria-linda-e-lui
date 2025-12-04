@@ -16,6 +16,8 @@ const corsOptions = {
     "http://localhost:4000",
     "https://localhost:3000",
     "https://localhost:4000",
+    "https://frontend-pokedex-neon.vercel.app",
+    "http://frontend-pokedex-neon.vercel.app",
     "*",
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
